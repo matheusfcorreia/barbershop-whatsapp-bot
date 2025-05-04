@@ -55,8 +55,13 @@ export const handleIncomingMessage = async (
         await handleServiceSelection(session, message);
         break;
       case 4:
-        // User entered a date
-        await handleDateSelection(session, message);
+        // User selected a date from the date picker
+        if (buttonId && buttonId.startsWith("calendar_")) {
+          const selectedDate = buttonId.replace("calendar_", "");
+          await handleDateSelection(session, selectedDate);
+        } else {
+          await resendCurrentStepOptions(session);
+        }
         break;
       case 5:
         // User selected an hour

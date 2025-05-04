@@ -151,11 +151,38 @@ export const sendServicesList = async (
 
 export const sendDatePicker = async (to: string): Promise<void> => {
   try {
-    // WhatsApp Cloud API doesn't have a date picker component
-    // So we'll just send a text message asking for a date in YYYY-MM-DD format
-    await whatsapp.sendText(
+    await whatsapp.sendMessage(
       to,
-      "Por favor, informe a data desejada no formato YYYY-MM-DD (exemplo: 2025-05-01):"
+      JSON.stringify({
+        type: "interactive",
+        interactive: {
+          type: "button",
+          body: {
+            text: "Selecione a data desejada:",
+          },
+          action: {
+            buttons: [
+              {
+                type: "calendar",
+                calendar: {
+                  title: "Selecione a data",
+                  description: "Escolha uma data para o agendamento",
+                  // Set minimum date to today
+                  minDate: new Date().toISOString().split("T")[0],
+                  // Set maximum date to 30 days from now
+                  maxDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+                    .toISOString()
+                    .split("T")[0],
+                  // Set initial date to today
+                  initialDate: new Date().toISOString().split("T")[0],
+                  // Set timezone to Brazil/Sao Paulo
+                  timezone: "America/Sao_Paulo",
+                },
+              },
+            ],
+          },
+        },
+      })
     );
   } catch (error) {
     console.error("Error sending date picker:", error);
