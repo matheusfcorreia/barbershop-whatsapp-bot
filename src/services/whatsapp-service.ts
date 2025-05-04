@@ -167,15 +167,11 @@ export const sendDatePicker = async (to: string): Promise<void> => {
                 calendar: {
                   title: "Selecione a data",
                   description: "Escolha uma data para o agendamento",
-                  // Set minimum date to today
                   minDate: new Date().toISOString().split("T")[0],
-                  // Set maximum date to 30 days from now
                   maxDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
                     .toISOString()
                     .split("T")[0],
-                  // Set initial date to today
                   initialDate: new Date().toISOString().split("T")[0],
-                  // Set timezone to Brazil/Sao Paulo
                   timezone: "America/Sao_Paulo",
                 },
               },
@@ -233,11 +229,7 @@ export const sendProfessionalsList = async (
   professionals: Professional[]
 ): Promise<void> => {
   try {
-    // Due to WhatsApp limitations on buttons (max 3), we have to handle this differently
-    // We'll use a list instead of buttons if there are more than 3 professionals
-
     if (professionals.length <= 3) {
-      // We can use buttons if 3 or fewer
       const buttons = professionals.map((professional) => ({
         type: "reply",
         reply: {
@@ -262,7 +254,6 @@ export const sendProfessionalsList = async (
         })
       );
     } else {
-      // Use a list for more than 3 professionals
       const rows = professionals.map((professional) => ({
         id: `professional_${professional.id}`,
         title: professional.nome,
@@ -359,7 +350,6 @@ export const sendFailureMessage = async (to: string): Promise<void> => {
       "Não foi possível realizar o agendamento, por favor, agende por esse link:"
     );
 
-    // Send a link as a separate message
     await whatsapp.sendMessage(
       to,
       JSON.stringify({
@@ -384,7 +374,6 @@ export const sendFailureMessage = async (to: string): Promise<void> => {
       })
     );
 
-    // Send the actual URL in a separate text message
     await whatsapp.sendText(to, process.env.SCHEDULE_URL || "");
   } catch (error) {
     console.error("Error sending failure message:", error);
@@ -392,7 +381,6 @@ export const sendFailureMessage = async (to: string): Promise<void> => {
   }
 };
 
-// Add this new function to handle Instagram button click
 export const handleInstagramButton = async (to: string): Promise<void> => {
   try {
     const instagramUrl = process.env.INSTAGRAM_URL || "";
