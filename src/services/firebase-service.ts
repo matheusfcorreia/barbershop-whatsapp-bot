@@ -1,7 +1,6 @@
-import { initializeApp, getApps, App } from "firebase/app";
+import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import * as admin from "firebase-admin";
-import path from "path";
 
 // Initialize Firebase Admin SDK
 const serviceAccount = require("../../firebase-key.json");
@@ -17,7 +16,7 @@ const firebaseConfig = {
   databaseURL: process.env.FIREBASE_DATABASE_URL,
 };
 
-let app: App;
+let app: FirebaseApp;
 
 if (!getApps().length) {
   app = initializeApp(firebaseConfig);

@@ -1,32 +1,43 @@
 {
   "name": "barber-bot-chat",
   "version": "1.0.0",
-  "description": "WhatsApp chat bot for barber shop scheduling",
-  "main": "lib/index.js",
+  "description": "WhatsApp bot for barber shop scheduling",
+  "main": "dist/index.js",
   "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "serve": "npm run build && firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepare": "husky install"
   },
   "engines": {
-    "node": "20"
+    "node": ">=18.0.0"
   },
   "dependencies": {
-    "axios": "^1.6.2",
-    "date-fns": "^2.30.0",
-    "dotenv": "^16.5.0",
-    "firebase": "^11.6.1",
-    "firebase-admin": "^11.11.1",
-    "firebase-functions": "^4.5.0",
-    "whatsapp-cloud-api": "^0.3.1"
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "firebase": "^10.8.0",
+    "firebase-admin": "^12.0.0",
+    "firebase-functions": "^4.8.0",
+    "firebase-functions-test": "^3.4.1",
+    "whatsapp-cloud-api": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.9.0",
-    "firebase-functions-test": "^3.1.0",
-    "typescript": "^5.2.2"
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.24",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "eslint": "^8.57.0",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5",
+    "ts-jest": "^29.1.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
   },
   "private": true
 }

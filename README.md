@@ -39,9 +39,8 @@ WHATSAPP_WABA_ID=your-waba-id
 WHATSAPP_VERIFY_TOKEN=your-verify-token
 
 # Firebase Configuration
-FIREBASE_PROJECT_ID=your-project-id
-FIREBASE_PRIVATE_KEY=your-private-key
-FIREBASE_CLIENT_EMAIL=your-client-email
+# FIREBASE_PROJECT_ID=your-project-id
+# FIREBASE_CLIENT_EMAIL=your-client-email
 
 # Avec Configurations
 API_BASE_URL=avec-api-url
