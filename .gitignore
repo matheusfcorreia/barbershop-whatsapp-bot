@@ -145,6 +145,7 @@ coverage/
 # Production
 build/
 dist/
+bot/
 
 # Misc
 .DS_Store

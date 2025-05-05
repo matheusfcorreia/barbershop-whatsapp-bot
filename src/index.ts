@@ -2,10 +2,12 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { handleIncomingMessage } from "./handlers/message-handler";
 
-// Initialize Firebase Admin
-admin.initializeApp({
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-});
+// Initialize Firebase Admin only if it hasn't been initialized
+if (!admin.apps.length) {
+  admin.initializeApp({
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
+  });
+}
 
 // WhatsApp webhook endpoint
 export const whatsappWebhook = functions.https.onRequest(
